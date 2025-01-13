@@ -1,4 +1,6 @@
 import numpy as np 
+import matplotlib.pyplot as plt
+from scipy.stats import linregress
 
 #Gaudin-Schumann particle size calculations
 #y = (D/D*)^a
@@ -25,9 +27,28 @@ for passing in Passing:
     Cumulative_Retained.append(cumulative_sum)
 
 Cumulative_passing = []
+current_passing = 100 - Passing[0]  # Start with 100 - the first passing value
+Cumulative_passing.append(current_passing)
 
-for cumulative_retained in Cumulative_Retained:
-    cumulative_passing = 100 - cumulative_retained
-    Cumulative_passing.append(cumulative_passing)
+for i in range(1, len(Passing)):
+    current_passing -= Passing[i]
+    Cumulative_passing.append(current_passing)
+    print  (Cumulative_passing)
 
-log_Sizes=[]
+log_Sizes = np.log10(Sizes)
+log_CumPassing = np.log10(Cumulative_passing)
+
+slope, intercept, r_value, p_value, std_err = linregress(log_Sizes, log_CumPassing)
+
+print(f"Fitted Line: log(Cumulative Passing) = {slope:.4f} * log(Size) + {intercept:.4f}")
+print(f"R-squared value: {r_value**2:.4f}")
+
+fitted_line = slope * log_Sizes + intercept
+
+plt.scatter(log_Sizes, log_CumPassing, label="Log-Log Data", color="red")
+plt.plot(log_Sizes, fitted_line, label="Fitted Line", color="blue")
+plt.xlabel("Log(Size)")
+plt.ylabel("Log(Cumulative Passing)")
+plt.legend()
+plt.title("Log-Log Fit of Gaudin-Schumann Distribution")
+plt.show()
