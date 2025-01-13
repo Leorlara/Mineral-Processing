@@ -1,3 +1,5 @@
+import numpy as np 
+
 #Gaudin-Schumann particle size calculations
 #y = (D/D*)^a
 # D* is top size of you dsitribution
@@ -15,7 +17,6 @@ for z in range(Data_points):
     passing = float(input(f"Enter the % passing {z+1}: "))
     Passing.append(passing)
 
-
 Cumulative_Retained = []
 cumulative_sum = 0
 
@@ -23,3 +24,10 @@ for passing in Passing:
     cumulative_sum += passing
     Cumulative_Retained.append(cumulative_sum)
 
+Cumulative_passing = []
+
+for cumulative_retained in Cumulative_Retained:
+    cumulative_passing = 100 - cumulative_retained
+    Cumulative_passing.append(cumulative_passing)
+
+log_Sizes=[]
