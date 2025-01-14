@@ -33,7 +33,6 @@ Cumulative_passing.append(current_passing)
 for i in range(1, len(Passing)):
     current_passing -= Passing[i]
     Cumulative_passing.append(current_passing)
-    print  (Cumulative_passing)
 
 log_Sizes = np.log10(Sizes)
 log_CumPassing = np.log10(Cumulative_passing)
