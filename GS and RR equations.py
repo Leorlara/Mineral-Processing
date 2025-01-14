@@ -7,7 +7,6 @@ from scipy.stats import linregress
 # D* is top size of you dsitribution
 # a is a constant to be determined accoridng to your curve
 #y y = cumulative mass undersize % passing size d
-
 while True:
     Top_Size_unit=input("Enter the unit to be used (mm or µm): ")
     Sizes = []
