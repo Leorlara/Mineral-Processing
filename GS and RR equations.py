@@ -55,3 +55,14 @@ while True:
     if Again_GS != "yes":
         print("End of program")
         break
+
+#rosin rammler particle size calculations
+#y = exp[-(x/xi)^b]
+# xi is the size parameter  (x at which y=63.2%)
+# b is a constant to be determined accoridng to your curve
+
+while True:
+    Again_RR = input("Do you want to enter a new set of data points? (yes/no): ").strip().lower()
+    if Again_RR != "yes":
+        print("End of program")
+        break
