@@ -62,6 +62,31 @@ while True:
 # b is a constant to be determined accoridng to your curve
 
 while True:
+    Top_Size_unit_RR=input("Enter the unit to be used (mm or µm): ")
+    Sizes_RR = []
+    Passing_RR = []
+    Data_points_RR = int(input("Enter the number of data points: "))
+    for z in range(Data_points_RR):
+        size_RR = float(input(f"Enter the size (from biggest to smallest) {z+1}: "))
+        Sizes_RR.append(size_RR)
+        passing_RR = float(input(f"Enter the % passing {z+1}: "))
+        Passing_RR.append(passing_RR)
+
+    Cumulative_Retained_RR = []
+    cumulative_sum_RR = 0
+
+    for passing_RR in Passing_RR:
+        cumulative_sum_RR += passing_RR
+        Cumulative_Retained_RR.append(cumulative_sum_RR)
+
+    Cumulative_passing_RR = []
+    current_passing_RR = 100 - Passing_RR[0]  # Start with 100 - the first passing value
+    Cumulative_passing_RR.append(current_passing_RR)
+
+    for i in range(1, len(Passing_RR)):
+        current_passing_RR -= Passing_RR[i]
+        Cumulative_passing_RR.append(current_passing_RR)
+
     Again_RR = input("Do you want to enter a new set of data points? (yes/no): ").strip().lower()
     if Again_RR != "yes":
         print("End of program")
