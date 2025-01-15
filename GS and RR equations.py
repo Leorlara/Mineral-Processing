@@ -59,7 +59,7 @@ while True:
             plt.title("Log-Log Fit of Gaudin-Schumann Distribution")
             plt.show()
             Again_GS = input("Do you want to enter a new set of data points? (yes/no): ").strip().lower()
-            if Again_GS != "yes":
+            if Again_GS != "no":
                 print("End of program")
                 break
 
