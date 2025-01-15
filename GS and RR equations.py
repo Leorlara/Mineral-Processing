@@ -14,42 +14,42 @@ while True:
     if regression_type == "gs":
         while True:
             Top_Size_unit=input("Enter the unit to be used (mm or µm): ")
-            Sizes = []
-            Passing = []
-            Data_points = int(input("Enter the number of data points: "))
+            Sizes = [] #array that gets the sieves information
+            Passing = [] #array that collects the retained mass
+            Data_points = int(input("Enter the number of data points: ")) #hHow many inpputs you have
 
-            for z in range(Data_points):
+            for z in range(Data_points): #loop to enter the avaibale information
                 size = float(input(f"Enter the size (from biggest to smallest) {z+1}: "))
                 Sizes.append(size)
                 passing = float(input(f"Enter the % passing {z+1}: "))
                 Passing.append(passing)
 
-            Cumulative_Retained = []
+            Cumulative_Retained = [] #array to calculate the cumulative retained mass
             cumulative_sum = 0
 
-            for passing in Passing:
+            for passing in Passing: #loop to calciulate the cumulative retained mass
                 cumulative_sum += passing
                 Cumulative_Retained.append(cumulative_sum)
 
-            Cumulative_passing = []
+            Cumulative_passing = [] #array to calculate the cumulative passing mass
             current_passing = 100 - Passing[0]  # Start with 100 - the first passing value
             Cumulative_passing.append(current_passing)
 
-            for i in range(1, len(Passing)):
+            for i in range(1, len(Passing)): #loop to calculate the cumulative passing mass
                 current_passing -= Passing[i]
                 Cumulative_passing.append(current_passing)
 
-            log_Sizes = np.log10(Sizes)
+            log_Sizes = np.log10(Sizes) #threse two lines are to calculate the log of the sizes and the cumulative passing (linerarizing)
             log_CumPassing = np.log10(Cumulative_passing)
 
             slope, intercept, r_value, p_value, std_err = linregress(log_Sizes, log_CumPassing)
-            Top_Size_GS = 10**(((np.log10(100))-intercept)/slope)
+            Top_Size_GS = 10**(((np.log10(100))-intercept)/slope) #calculation of the D* in the GS method (which is the passing at 100%)
             fitted_line = slope * log_Sizes + intercept
 
-            print(f"Fitted Line: log(Cumulative Passing) = {slope:.4f} * log(Size) + {intercept:.4f}")
+            print(f"Fitted Line: log(Cumulative Passing) = {slope:.4f} * log(Size) + {intercept:.4f}") #information on the linear fit
             print(f"R-squared value: {r_value**2:.4f}")
-            print(f"D* parameter = {Top_Size_GS:.2f}")
-            print(f"a parameter = {slope:.4f}")
+            print(f"D* parameter = {Top_Size_GS:.2f}") #GS parameter
+            print(f"a parameter = {slope:.4f}") #GS parameter
 
             plt.scatter(log_Sizes, log_CumPassing, label="Log-Log Data", color="red")
             plt.plot(log_Sizes, fitted_line, label="Fitted Line", color="blue")
