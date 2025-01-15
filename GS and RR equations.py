@@ -9,7 +9,8 @@ from scipy.stats import linregress
 #y y = cumulative mass undersize % passing size d
 
 while True:
-    regression_type = input("Select regression type: Gaudin-Schumann (GS) or Rosin-Rammler (RR): ").strip().lower()
+    regression_type = input("Select regression type: Gaudin-Schumann (GS) or Rosin-Rammler (RR): ").strip().lower() #Regression method to be selected
+
     if regression_type == "gs":
         while True:
             Top_Size_unit=input("Enter the unit to be used (mm or µm): ")
@@ -42,11 +43,13 @@ while True:
             log_CumPassing = np.log10(Cumulative_passing)
 
             slope, intercept, r_value, p_value, std_err = linregress(log_Sizes, log_CumPassing)
+            Top_Size_GS = 10**(((np.log10(100))-intercept)/slope)
+            fitted_line = slope * log_Sizes + intercept
 
             print(f"Fitted Line: log(Cumulative Passing) = {slope:.4f} * log(Size) + {intercept:.4f}")
             print(f"R-squared value: {r_value**2:.4f}")
-
-            fitted_line = slope * log_Sizes + intercept
+            print(f"D* parameter = {Top_Size_GS:.2f}")
+            print(f"a parameter = {slope:.4f}")
 
             plt.scatter(log_Sizes, log_CumPassing, label="Log-Log Data", color="red")
             plt.plot(log_Sizes, fitted_line, label="Fitted Line", color="blue")
