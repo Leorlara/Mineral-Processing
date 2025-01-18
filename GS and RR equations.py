@@ -103,16 +103,22 @@ while True:
                 natural_passing = np.log(np.log(natural_passing))
                 log_natural_passing.append(natural_passing[i])
 
-            slope_RR, intercept_RR, r_value_RR, p_value_RR, std_err_RR = linregress(log_Sizes_RR, log_Cumulative_passing_RR)
+            slope_RR, intercept_RR, r_value_RR, p_value_RR, std_err_RR = linregress(log_Sizes_RR, log_natural_passing)
             fitted_line_RR = slope_RR * log_Sizes_RR + intercept_RR
 
             print(f"Fitted Line: ln(-ln(1 - Passing)) = {slope_RR:.4f} * ln(Size) + {intercept_RR:.4f}")
             print(f"R-squared value: {r_value_RR**2:.4f}")
+            x_rr = np.log(intercept_RR/slope_RR)
 
-            plt.scatter(log_Sizes_RR, log_Cumulative_passing_RR, label="Log-Log Data", color="red")
+            print(f"m parameter = {slope_RR:.2f}") #RR parameter
+            print(f"b parameter = {intercept_RR:.4f}") #RR parameter
+            print(f"D* parameter = {x_rr:.2f}") #RR parameter
+
+
+            plt.scatter(log_Sizes_RR, log_natural_passing, label="Log-Log Data", color="red")
             plt.plot(log_Sizes_RR, fitted_line_RR, label="Fitted Line", color="blue")
             plt.xlabel("ln(Size)")
-            plt.ylabel("ln(-ln(1 - Passing))")
+            plt.ylabel("ln(ln(1/(1-Passing)))")
             plt.legend()
             plt.title("Rosin-Rammler Distribution Fit")
             plt.show()
