@@ -98,8 +98,8 @@ while True:
             natural_passing = []
             log_natural_passing = []
 
-            for i in range(len(Passing_RR)):
-                 value = 1 / (1 - (Passing_RR[i] / 100))  
+            for i in range(len(Cumulative_passing_RR)):
+                 value = 1 / (1 - (Cumulative_passing_RR [i] / 100))  
                  log_value = np.log(np.log(value))        
                  natural_passing.append(value)           
                  log_natural_passing.append(log_value)   
