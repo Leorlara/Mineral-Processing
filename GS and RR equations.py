@@ -70,35 +70,36 @@ while True:
     if regression_type == "rr":
         while True:
             Top_Size_unit_RR=input("Enter the unit to be used (mm or µm): ")
-            Sizes_RR = []
-            Passing_RR = []
-            Data_points_RR = int(input("Enter the number of data points: "))
-            for z in range(Data_points_RR):
+            Sizes_RR = [] #array that gets the sieves information
+            Passing_RR = [] #array that collects the retained mass
+            Data_points_RR = int(input("Enter the number of data points: ")) #hHow many inpputs you have
+            for z in range(Data_points_RR): #loop to enter the inputs
                 size_RR = float(input(f"Enter the size (from biggest to smallest) {z+1}: "))
                 Sizes_RR.append(size_RR)
                 passing_RR = float(input(f"Enter the % passing {z+1}: "))
                 Passing_RR.append(passing_RR)
 
-            Cumulative_Retained_RR = []
-            cumulative_sum_RR = 0
+            Cumulative_Retained_RR = [] #array to calculate the cumulative retained mass
+            cumulative_sum_RR = 0 #initial value of the cumulative retained mass
 
-            for passing_RR in Passing_RR:
+            for passing_RR in Passing_RR: #loop to calculate the cumulative retained mass
                 cumulative_sum_RR += passing_RR
                 Cumulative_Retained_RR.append(cumulative_sum_RR)
 
-            Cumulative_passing_RR = []
-            current_passing_RR = 100 - Passing_RR[0]  # Start with 100 - the first passing value
-            Cumulative_passing_RR.append(current_passing_RR)
+            Cumulative_passing_RR = [] #array to calculate the cumulative passing mass
+            current_passing_RR = 100 - Passing_RR[0]
+            Cumulative_passing_RR.append(current_passing_RR) #append the first value to the array
 
-            for i in range(1, len(Passing_RR)):
+            for i in range(1, len(Passing_RR)): #loop to calculate the cumulative passing mass
                 current_passing_RR -= Passing_RR[i]
                 Cumulative_passing_RR.append(current_passing_RR)
 
-            log_Sizes_RR = np.log(Sizes_RR)
+            #Lines to linearize the data to make the regression
+            log_Sizes_RR = np.log(Sizes_RR) 
             natural_passing = []
             log_natural_passing = []
 
-            for i in range(len(Cumulative_passing_RR)):
+            for i in range(len(Cumulative_passing_RR)): #loop to calculate the natural passing and the log of the natural passing
                  value = 1 / (1 - (Cumulative_passing_RR [i] / 100))  
                  log_value = np.log(np.log(value))        
                  natural_passing.append(value)           
