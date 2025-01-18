@@ -109,7 +109,7 @@ while True:
 
             print(f"Fitted Line: ln(-ln(1 - Passing)) = {slope_RR:.4f} * ln(Size) + {intercept_RR:.4f}")
             print(f"R-squared value: {r_value_RR**2:.4f}")
-            x_rr = np.log(intercept_RR/slope_RR)
+            x_rr = np.exp(-intercept_RR/slope_RR)
 
             print(f"m parameter = {slope_RR:.2f}") #RR parameter
             print(f"b parameter = {intercept_RR:.4f}") #RR parameter
