@@ -99,9 +99,10 @@ while True:
             log_natural_passing = []
 
             for i in range(len(Passing_RR)):
-                natural_passing.append(1/(1-(Passing_RR[i]/100)))
-                natural_passing = np.log(np.log(natural_passing))
-                log_natural_passing.append(natural_passing[i])
+                 value = 1 / (1 - (Passing_RR[i] / 100))  
+                 log_value = np.log(np.log(value))        
+                 natural_passing.append(value)           
+                 log_natural_passing.append(log_value)   
 
             slope_RR, intercept_RR, r_value_RR, p_value_RR, std_err_RR = linregress(log_Sizes_RR, log_natural_passing)
             fitted_line_RR = slope_RR * log_Sizes_RR + intercept_RR
