@@ -14,6 +14,8 @@ if method == "linear":
     P80_linear = ((0.8 - cum_passing_over_linear) / (cum_passing_under_linear - cum_passing_over_linear)) * (sieve_under_linear - sieve_over_linear) + sieve_over_linear
     print(f"The P80% is {P80_linear}")
 
+    #The linear method is pretty siumple and would probably be quicker to just use excel
+
 elif method == "logarithmic":
 
     # The following inputs are mandatory to calculate the P80%
