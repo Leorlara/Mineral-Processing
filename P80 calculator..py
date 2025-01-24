@@ -27,6 +27,6 @@ elif method == "logarithmic":
     # The calculations start here
     ln_size_uper = np.log(sieve_over_logarithmic)
     ln_size_lower = np.log(sieve_under_logarithmic)
-    ln_cum_passing_over = -np.log(cum_passing_over_logarithmic)
-    ln_cum_passing_under = -np.log(cum_passing_under_logarithmic)
+    ln_cum_passing_over = np.log(-np.log(cum_passing_over_logarithmic))
+    ln_cum_passing_under = np.log(-np.log(cum_passing_under_logarithmic))
 
