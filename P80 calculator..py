@@ -22,7 +22,11 @@ elif method == "logarithmic":
     sieve_under_logarithmic = float(input("Enter the closest sieve size under 80%: "))
     sieve_over_logarithmic = float(input("Enter the closest sieve size over 80%: "))
     cum_passing_over_logarithmic = float(input("Enter the cumulative passing from the size over 80%"))
-    cum_passing_under_logarithmicr = float(input("Enter the cumulative passing from the size under 80%"))
+    cum_passing_under_logarithmic = float(input("Enter the cumulative passing from the size under 80%"))
 
     # The calculations start here
+    ln_size_uper = np.log(sieve_over_logarithmic)
+    ln_size_lower = np.log(sieve_under_logarithmic)
+    ln_cum_passing_over = -np.log(cum_passing_over_logarithmic)
+    ln_cum_passing_under = -np.log(cum_passing_under_logarithmic)
 
