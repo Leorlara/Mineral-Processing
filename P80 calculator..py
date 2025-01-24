@@ -32,6 +32,8 @@ elif method == "ln":
     P80_logarithmic = np.exp(P80_ln) #We are leaving the logarithmic scale and going back to the linear scale here
     print(f"The P80% is {P80_logarithmic}")
 
+    #Overall this was a very simple code to write, and I only did it to practice, I still find easier to this process through Excel, specially when you have to obtain multiple P80%s
+
 
 
 
