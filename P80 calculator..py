@@ -1,3 +1,5 @@
+# A possible idea for to improve this code would be to detected the over and under sieves from a csv file (as the new input) and calculate the P80% from it
+
 import numpy as np
 
 method = input("Would you like to use a linear of logarithmic method? (li/ln) ").strip().lower()
