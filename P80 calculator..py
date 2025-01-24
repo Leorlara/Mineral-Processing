@@ -1,6 +1,6 @@
 import numpy as np
 
-method = input("Would you like to use a linear of logarithmic method? (li/ln)").strip().lower()
+method = input("Would you like to use a linear of logarithmic method? (li/ln) ").strip().lower()
 
 if method == "li":
 
