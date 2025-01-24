@@ -19,8 +19,8 @@ elif method == "ln":
     # The following inputs are mandatory to calculate the P80%
     sieve_over_logarithmic = float(input("Enter the closest sieve size over 80%: "))
     sieve_under_logarithmic = float(input("Enter the closest sieve size under 80%: "))
-    cum_passing_over_logarithmic = float(input("Enter the cumulative passing from the size over 80%")) / 100
-    cum_passing_under_logarithmic = float(input("Enter the cumulative passing from the size under 80%")) / 100
+    cum_passing_over_logarithmic = float(input("Enter the cumulative passing from the size over 80% ")) / 100
+    cum_passing_under_logarithmic = float(input("Enter the cumulative passing from the size under 80% ")) / 100
 
     ln_size_over = np.log(sieve_over_logarithmic)
     ln_size_under = np.log(sieve_under_logarithmic)
