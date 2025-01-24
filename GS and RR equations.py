@@ -1,3 +1,7 @@
+# As it stands this would better to de done using excel, but I think I can make the code better so it becomes a easier process than excel
+# I guess the next step would be to read a csv file with the data and make the fit
+# Also another goal would be to skip certain parts if the available already has it (If the Cumulative passing is already available, there's no need to calculate it again here)
+
 import numpy as np 
 import matplotlib.pyplot as plt
 from scipy.stats import linregress
@@ -126,7 +130,8 @@ while True:
             plt.title("Rosin-Rammler Distribution Fit")
             plt.show()
 
-            Again_RR = input("Do you want to enter a new set of data points? (yes/no): ").strip().lower()
-            if Again_RR != "yes":
-                print("End of program")
-                break
+            # Again_RR = input("Do you want to enter a new set of data points? (yes/no): ").strip().lower()
+            # if Again_RR != "yes":
+            #     print("End of program")
+            #     break
+
