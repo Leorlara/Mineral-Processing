@@ -28,9 +28,8 @@ elif method == "ln":
     ln_cum_passing_under = np.log(-np.log(cum_passing_under_logarithmic))
 
     # The calculations start here
-    P80_ln = ((-1.4994 - ln_cum_passing_over) / (ln_cum_passing_under - ln_cum_passing_over)) * (ln_size_under - ln_size_over) + ln_size_over
-    P80_logarithmic = np.exp(P80_ln)
-    print(P80_ln)
+    P80_ln = ((-1.4994 - ln_cum_passing_over) / (ln_cum_passing_under - ln_cum_passing_over)) * (ln_size_under - ln_size_over) + ln_size_over #the P80 is calculated here
+    P80_logarithmic = np.exp(P80_ln) #We are leaving the logarithmic scale and going back to the linear scale here
     print(f"The P80% is {P80_logarithmic}")
 
 
