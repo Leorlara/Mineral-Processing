@@ -24,12 +24,14 @@ elif method == "logarithmic":
     cum_passing_over_logarithmic = float(input("Enter the cumulative passing from the size over 80%")) / 100
     cum_passing_under_logarithmic = float(input("Enter the cumulative passing from the size under 80%")) / 100
 
-    ln_size_uper = np.log(sieve_over_logarithmic)
-    ln_size_lower = np.log(sieve_under_logarithmic)
+    ln_size_over = np.log(sieve_over_logarithmic)
+    ln_size_under = np.log(sieve_under_logarithmic)
     ln_cum_passing_over = np.log(-np.log(cum_passing_over_logarithmic))
     ln_cum_passing_under = np.log(-np.log(cum_passing_under_logarithmic))
 
-        # The calculations start here
+    # The calculations start here
+    P80_ln = ((np.log(80) - ln_cum_passing_over) / (ln_cum_passing_under - ln_cum_passing_over)) * (ln_size_under - ln_size_over) + ln_size_over
+    P80_logarithmic = np.exp(P80_ln)
 
 
 
