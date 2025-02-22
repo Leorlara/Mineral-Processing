@@ -2,6 +2,7 @@ import csv
 
 def read_last_column(file_path):
     try:
+        file_path = file_path.strip('"')  # Remove quotes from file path (a qol improvement when you use the copy as a path on windows)
         with open(file_path, mode='r', newline='') as file:
             reader = csv.reader(file, delimiter=';')  # Use semicolon as delimiter
             for row in reader:
