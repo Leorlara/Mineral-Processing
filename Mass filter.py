@@ -17,5 +17,6 @@ def read_last_column(file_path):
 
 # Example usage
 Reference_mass = input("Enter the average (g): ")
-file_path = input("enter the file path")  # input file path
-read_last_column(file_path)
+file_path = input("enter the file path: ")  # input file path
+output_folder = input("Enter the output folder path: ")
+filter_csv_by_10th_column(file_path, output_folder, reference_mass)
