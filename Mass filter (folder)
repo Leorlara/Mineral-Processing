@@ -48,7 +48,7 @@ def filter_csv_files_in_folder(folder_path, output_folder, reference_masses):
     except Exception as e:
         print(f"An error occurred: {e}")
 
-# Example usage
+# inputs here
 folder_path = input("Enter the folder path containing CSV files: ")
 output_folder = input("Enter the output folder path: ")
 num_files = int(input("Enter the number of files: "))
