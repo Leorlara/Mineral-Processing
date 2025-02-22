@@ -11,7 +11,7 @@ def read_last_column(file_path):
         upper_bound = Reference_mass * 1.3  # +30%
         
         with open(file_path, mode='r', newline='') as file:
-            reader = csv.reader(file, delimiter=';')  # Use semicolon as delimiter
+            reader = csv.reader(file, delimiter=';')  # # Use semicolon as delimiter (since it's a csv file, if another version is been used, change it here
             header = next(reader, None)  # Read the header if present
             
             if header:
