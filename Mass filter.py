@@ -5,8 +5,10 @@ def read_last_column(file_path):
     try:
         file_path = file_path.strip('"')  # Remove quotes from copied file paths
         filtered_rows = []
-        lower_bound = reference_mass * 0.7  # -30%
-        upper_bound = reference_mass * 1.3  # +30%
+        
+        # Below is the range of the filter, if another value different from 30% is used, change it bwelow
+        lower_bound = Reference_mass * 0.7  # -30%
+        upper_bound = Reference_mass * 1.3  # +30%
         
         with open(file_path, mode='r', newline='') as file:
             reader = csv.reader(file, delimiter=';')  # Use semicolon as delimiter
@@ -43,4 +45,4 @@ def read_last_column(file_path):
 Reference_mass = input("Enter the average (g): ")
 file_path = input("enter the file path: ")  # input file path
 output_folder = input("Enter the output folder path: ")
-read_last_column(file_path, output_folder, reference_mass)
+read_last_column(file_path, output_folder, Reference_mass)
