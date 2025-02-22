@@ -1,14 +1,14 @@
 import csv
 
-def read_10th_column(file_path):
+def read_last_column(file_path):
     try:
         with open(file_path, mode='r', newline='') as file:
-            reader = csv.reader(file)
+            reader = csv.reader(file, delimiter=';')  # Use semicolon as delimiter
             for row in reader:
-                if len(row) >= 10:  
-                    print(row[9])  
+                if row:  # Ensure row is not empty
+                    print(row[-1])  # Print the last column
                 else:
-                    print("Row does not have 10 columns")
+                    print("Empty row encountered")
     except FileNotFoundError:
         print("File not found. Please check the file path.")
     except Exception as e:
@@ -17,4 +17,4 @@ def read_10th_column(file_path):
 # Example usage
 Reference_mass = input("Enter the average (g): ")
 file_path = input("enter the file path")  # input file path
-read_10th_column(file_path)
+read_last_column(file_path)
