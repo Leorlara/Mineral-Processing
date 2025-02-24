@@ -17,13 +17,14 @@ def filter_csv_files_in_folder(folder_path, output_folder, reference_masses):
             
             filtered_rows = []
 
-            # Rrange of the filter, if another value different from 30% is used, change it bwelow
+            # Rrange of the mass filter
+            # Set to the standart +-30% range of the SMC test
             lower_bound = reference_mass * 0.7  # -30%
             upper_bound = reference_mass * 1.3  # +30%
             
             with open(file_path, mode='r', newline='') as file:
                 reader = csv.reader(file, delimiter=';')  # Use semicolon as delimiter (since it's a csv file, if another version is been used, change it here)
-                header = next(reader, None)  # Read the header if present
+                header = next(reader, None)  # Read the header if there is one
                 
                 if header:
                     filtered_rows.append(header)
