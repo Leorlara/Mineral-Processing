@@ -3,8 +3,8 @@ import os
 
 def filter_csv_files_in_folder(folder_path, output_folder, reference_masses):
     try:
-        folder_path = folder_path.strip('"')  # Remove quotes from copied paths
-        output_folder = output_folder.strip('"')
+        folder_path = folder_path.strip('"')  # Remove quotes from copied paths (added because when you copy as a path from window it adds "" to the path)
+        output_folder = output_folder.strip('"') # Same reason as explained above
         
         if not os.path.exists(output_folder):
             os.makedirs(output_folder)  # Create output folder if it doesn't exist
