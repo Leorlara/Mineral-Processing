@@ -31,7 +31,7 @@ def filter_csv_files_in_folder(folder_path, output_folder, reference_masses):
                 for row in reader:
                     if len(row) >= 10:  # Ensure the row has at least 10 columns
                         try:
-                            value = float(row[9]replace(',', '.'))  # Convert 10th column to float also here we make the changes from commas to dots
+                            value = float(row[9].replace(',', '.'))  # Convert 10th column to float also here we make the changes from commas to dots
                             if lower_bound <= value <= upper_bound:
                                 filtered_rows.append(row)
                         except ValueError:
