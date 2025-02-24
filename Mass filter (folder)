@@ -29,9 +29,9 @@ def filter_csv_files_in_folder(folder_path, output_folder, reference_masses):
                     filtered_rows.append(header)
                 
                 for row in reader:
-                    if len(row) >= 10:  # Ensure the row has at least 10 columns
+                    if len(row) >= 10:  # Ensure the row has at least 10 columns - This if is kinda useless, might remove it
                         try:
-                            value = float(row[9].replace(',', '.'))  # Convert 10th column to float also here we make the changes from commas to dots
+                            value = float(row[9].replace(',', '.'))  # Convert 10th column to float and make the changes from commas to dots
                             if lower_bound <= value <= upper_bound:
                                 filtered_rows.append(row)
                         except ValueError:
