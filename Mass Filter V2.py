@@ -56,7 +56,7 @@ def filter_csv_files_in_folder(folder_path, output_folder, reference_masses):
                 writer = csv.writer(file, delimiter=';')
                 writer.writerows(filtered_rows)
             
-            print(f"Filtered CSV saved as: {output_file_path}")
+            print(f"Filtered CSV saved as: {output_file_path}") # if everything goes well, you will see each print for each file
     except Exception as e:
         print(f"An error occurred: {e}")
 
