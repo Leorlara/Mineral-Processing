@@ -1,10 +1,10 @@
 import csv
 import os
 
-def sanitize_path(path):
+def sanitize_path(path): #fuction that removes quotes and normalizes the path
     return os.path.normpath(path.strip().strip('"'))  # Remove quotes and normalize path when you copy from file exploer it will come with quotes
 
-def filter_csv_files_in_folder(folder_path, output_folder, reference_masses):
+def filter_csv_files_in_folder(folder_path, output_folder, reference_masses): # fuction that performes the filtering 
     try:
         folder_path = sanitize_path(folder_path)
         output_folder = sanitize_path(output_folder)
