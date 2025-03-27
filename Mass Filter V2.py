@@ -27,7 +27,7 @@ def filter_csv_files_in_folder(folder_path, output_folder, reference_masses):
                 print(f"Skipping {file_name}: No reference mass provided.")
                 continue
             
-            reference_mass = reference_masses[file_name] # Filter range
+            reference_mass = reference_masses[file_name] # Filter range (change it you want to use a different range)
             lower_bound = reference_mass * 0.7  # -30%
             upper_bound = reference_mass * 1.3  # +30%
             filtered_rows = []
@@ -50,7 +50,7 @@ def filter_csv_files_in_folder(folder_path, output_folder, reference_masses):
                     else:
                         print("Skipping row with insufficient columns")
             
-            output_file_path = os.path.join(output_folder, file_name)  # Keep the original filename (essential for the files to be processed correctly)
+            output_file_path = os.path.join(output_folder, file_name)  # Keep the original file name (essential for the files to be processed correctly)
             
             with open(output_file_path, mode='w', newline='') as file:
                 writer = csv.writer(file, delimiter=';')
