@@ -13,7 +13,7 @@ def filter_csv_files_in_folder(folder_path, output_folder, reference_masses):
         print(f"Saving filtered files to: {output_folder}")
         
         if not os.path.exists(output_folder):
-            os.makedirs(output_folder)  # Create output folder if it doesn't exist
+            os.makedirs(output_folder)  # Create output folder if it doesn't exist (in case of typo)
         
         for file_name in os.listdir(folder_path):
             file_path = os.path.join(folder_path, file_name)
@@ -23,17 +23,17 @@ def filter_csv_files_in_folder(folder_path, output_folder, reference_masses):
             
             print(f"Processing file: {file_name}")
             
-            if file_name not in reference_masses:
+            if file_name not in reference_masses: # here just in case a reference mass was not provided
                 print(f"Skipping {file_name}: No reference mass provided.")
                 continue
             
-            reference_mass = reference_masses[file_name]
+            reference_mass = reference_masses[file_name] # Filter range
             lower_bound = reference_mass * 0.7  # -30%
             upper_bound = reference_mass * 1.3  # +30%
             filtered_rows = []
             
             with open(file_path, mode='r', newline='') as file:
-                reader = csv.reader(file, delimiter=';')  # Use semicolon as delimiter
+                reader = csv.reader(file, delimiter=';')  # Use semicolon as delimiter (chnage if a different one is been used)
                 header = next(reader, None)  # Read the header if present
                 
                 if header:
@@ -42,7 +42,7 @@ def filter_csv_files_in_folder(folder_path, output_folder, reference_masses):
                 for row in reader:
                     if len(row) >= 10:  # Ensure the row has at least 10 columns
                         try:
-                            value = float(row[9].replace(',', '.'))  # Convert 10th column to float, handling comma decimal separator
+                            value = float(row[9].replace(',', '.'))  # Convert 10th column to float, handling comma decimal separator (added for files that use , as decimal separator)
                             if lower_bound <= value <= upper_bound:
                                 filtered_rows.append(row)
                         except ValueError:
@@ -50,7 +50,7 @@ def filter_csv_files_in_folder(folder_path, output_folder, reference_masses):
                     else:
                         print("Skipping row with insufficient columns")
             
-            output_file_path = os.path.join(output_folder, file_name)  # Keep the original filename
+            output_file_path = os.path.join(output_folder, file_name)  # Keep the original filename (essential for the files to be processed correctly)
             
             with open(output_file_path, mode='w', newline='') as file:
                 writer = csv.writer(file, delimiter=';')
@@ -61,12 +61,11 @@ def filter_csv_files_in_folder(folder_path, output_folder, reference_masses):
         print(f"An error occurred: {e}")
 
 # Example usage
-folder_path = input("Enter the folder path containing files: ")
-output_folder = input("Enter the output folder path: ")
+folder_path = input("Enter the folder path containing files: ") #Copy path from your file explorer
+output_folder = input("Enter the output folder path: ") # Copy the path from your file explorer
 folder_path = sanitize_path(folder_path)
 output_folder = sanitize_path(output_folder)
 
-print("Scanning folder for files...")
 reference_masses = {}
 
 files = [f for f in os.listdir(folder_path) if os.path.isfile(os.path.join(folder_path, f))]
