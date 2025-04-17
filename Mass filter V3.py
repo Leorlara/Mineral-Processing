@@ -4,7 +4,7 @@ import os
 def sanitize_path(path):
     return os.path.normpath(path.strip().strip('"'))  # Remove quotes and normalize path
 
-def filter_csv_files_in_folder(folder_path, output_folder, reference_masses):
+def filter_csv_files_in_folder(folder_path, output_folder, reference_masses): # Main fuction that does the filtering
     try:
         folder_path = sanitize_path(folder_path)
         output_folder = sanitize_path(output_folder)
