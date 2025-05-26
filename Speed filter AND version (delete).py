@@ -41,7 +41,7 @@ def filter_csv_files_on_columns_8_and_9(folder_path, output_folder):
                             value8 = float(row[7].replace(',', '.'))
                             value9 = float(row[8].replace(',', '.'))
                             
-                            if value8 > 80 or value9 > 80:
+                            if value8 > 80 and value9 > 80:
                                 removed_rows += 1
                                 continue
                             
