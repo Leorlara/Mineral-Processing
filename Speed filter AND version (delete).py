@@ -2,9 +2,9 @@ import csv
 import os
 
 def sanitize_path(path):
-    return os.path.normpath(path.strip().strip('"'))  # Remove quotes and normalize path
+    return os.path.normpath(path.strip().strip('"'))
 
-def filter_csv_files_on_columns_8_and_9(folder_path, output_folder):  # New function
+def filter_csv_files_on_columns_8_and_9(folder_path, output_folder):
     try:
         folder_path = sanitize_path(folder_path)
         output_folder = sanitize_path(output_folder)
@@ -38,10 +38,10 @@ def filter_csv_files_on_columns_8_and_9(folder_path, output_folder):  # New func
                     total_rows += 1
                     if len(row) >= 9:
                         try:
-                            value8 = float(row[7].replace(',', '.'))  # Column 8
-                            value9 = float(row[8].replace(',', '.'))  # Column 9
+                            value8 = float(row[7].replace(',', '.'))
+                            value9 = float(row[8].replace(',', '.'))
                             
-                            if value8 > 80 and value9 > 80:
+                            if value8 > 80 or value9 > 80:
                                 removed_rows += 1
                                 continue
                             
@@ -53,20 +53,30 @@ def filter_csv_files_on_columns_8_and_9(folder_path, output_folder):  # New func
                         print("Skipping row with insufficient columns")
                         removed_rows += 1
             
-            output_file_path = os.path.join(output_folder, file_name)
-            with open(output_file_path, mode='w', newline='') as file:
-                writer = csv.writer(file, delimiter=';')
-                writer.writerows(filtered_rows)
-            
-            print(f"Filtered CSV saved as: {output_file_path}")
             percentage_removed = (removed_rows / total_rows * 100) if total_rows else 0
-            summary_data.append([file_name, total_rows, removed_rows, f"{percentage_removed:.2f}%"])
+            
+            if percentage_removed <= 25:
+                output_file_path = os.path.join(output_folder, file_name)
+                with open(output_file_path, mode='w', newline='') as file:
+                    writer = csv.writer(file, delimiter=';')
+                    writer.writerows(filtered_rows)
+                print(f"Filtered CSV saved as: {output_file_path}")
+            else:
+                print(f"Skipping output for {file_name}: {percentage_removed:.2f}% rows removed exceeds 25% threshold")
+            
+            summary_data.append([
+                file_name, 
+                total_rows, 
+                removed_rows, 
+                f"{percentage_removed:.2f}%", 
+                "Saved" if percentage_removed <= 25 else "Deleted"
+            ])
         
         # Write summary file
         summary_file_path = os.path.join(output_folder, "summary.csv")
         with open(summary_file_path, mode='w', newline='') as summary_file:
             writer = csv.writer(summary_file, delimiter=';')
-            writer.writerow(["File Name", "Total Rows", "Removed Rows", "Percentage Removed"])
+            writer.writerow(["File Name", "Total Rows", "Removed Rows", "Percentage Removed", "Status"])
             writer.writerows(summary_data)
         
         print(f"Summary file saved as: {summary_file_path}")
