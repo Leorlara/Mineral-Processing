@@ -23,10 +23,10 @@ def filter_csv_files_in_folder(folder_path, output_folder, reference_masses): # 
             if not os.path.isfile(file_path):  # Skip directories
                 continue
             
-            print(f"Processing file: {file_name}")
+            #print(f"Processing file: {file_name}")
             
             if file_name not in reference_masses:
-                print(f"Skipping {file_name}: No reference mass provided.")
+                #print(f"Skipping {file_name}: No reference mass provided.")
                 continue
             
             reference_mass = reference_masses[file_name]
