@@ -66,7 +66,7 @@ def filter_csv_files_on_columns_8_and_9(folder_path, output_folder):  # New func
         summary_file_path = os.path.join(output_folder, "summary.csv")
         with open(summary_file_path, mode='w', newline='') as summary_file:
             writer = csv.writer(summary_file, delimiter=';')
-            writer.writerow(["File Name", "Total Rows", "Removed Rows"])
+            writer.writerow(["File Name", "Total Rows", "Removed Rows", "Percentage Removed"])
             writer.writerows(summary_data)
         
         print(f"Summary file saved as: {summary_file_path}")
