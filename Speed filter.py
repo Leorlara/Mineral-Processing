@@ -59,7 +59,8 @@ def filter_csv_files_on_columns_8_and_9(folder_path, output_folder):  # New func
                 writer.writerows(filtered_rows)
             
             print(f"Filtered CSV saved as: {output_file_path}")
-            summary_data.append([file_name, total_rows, removed_rows])
+            percentage_removed = (removed_rows / total_rows * 100) if total_rows else 0
+            summary_data.append([file_name, total_rows, removed_rows, f"{percentage_removed:.2f}%"])
         
         # Write summary file
         summary_file_path = os.path.join(output_folder, "summary.csv")
