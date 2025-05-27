@@ -69,7 +69,7 @@ def filter_csv_files_on_columns_8_and_9(folder_path, output_folder):
                 total_rows, 
                 removed_rows, 
                 f"{percentage_removed:.2f}%", 
-                "Saved" if percentage_removed <= 25 else "Deleted"
+                "Saved" if percentage_removed <= 50 else "Deleted"
             ])
         
         # Write summary file
