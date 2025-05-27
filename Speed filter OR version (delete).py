@@ -55,7 +55,7 @@ def filter_csv_files_on_columns_8_and_9(folder_path, output_folder):
             
             percentage_removed = (removed_rows / total_rows * 100) if total_rows else 0
             
-            if percentage_removed <= 25:
+            if percentage_removed <= 50:
                 output_file_path = os.path.join(output_folder, file_name)
                 with open(output_file_path, mode='w', newline='') as file:
                     writer = csv.writer(file, delimiter=';')
