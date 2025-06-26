@@ -18,9 +18,9 @@ while True:
         cummulative_metal1 = []
 
         
-    elif regression_type == "2 comp":
+    #elif regression_type == "2 comp":
 
-    elif regression_type == "3 comp":
+    #elif regression_type == "3 comp":
 
-    elif regression_type == "Rectangular":
+    #elif regression_type == "Rectangular":
         
