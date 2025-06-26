@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# Input your data
+# Inout data for the exercise
 your_data = [
     2.68, 3.73, 3.62, 3.43, 3.24, 3.34, 3.21, 3.15, 3.04, 2.98,
     3.16, 3.18, 3.21, 3.15, 3.15, 3.08, 3.08, 3.02, 3.02, 3.02,
@@ -19,7 +19,7 @@ your_data = [
     3.16, 3.02, 3.02, 3.03, 3.03, 3.05, 3.05, 3.17, 3.17, 2.98, 2.98
 ]
 
-def analyze_series(series, max_lag=60):
+def analyze_series(series, max_lag=60): #where I defined the maximum lag
     series = pd.Series(series).dropna()
     n = len(series)
     mean = series.mean()
@@ -32,7 +32,7 @@ def analyze_series(series, max_lag=60):
     autocorrelations = []
     correlation_times = []
 
-    threshold = np.exp(-1)  # ≈0.3679
+    threshold = np.exp(-1)  # ≈0.3679 - In Order to change the target e, changes this value here
     tau_drop_lag = None
 
     # compute covariances, autocorrelations, and τ_k
@@ -44,7 +44,7 @@ def analyze_series(series, max_lag=60):
             x1 = series[:-k]
             x2 = series[k:]
             cov = np.sum((x1 - mean) * (x2 - mean)) / (n - k)
-            autocorr = cov / variance
+            autocorr = cov / variance #calculation of aut
 
         covariances.append(cov)
         autocorrelations.append(autocorr)
@@ -100,4 +100,4 @@ def analyze_series(series, max_lag=60):
     }
 
 # Run the analysis
-results = analyze_series(your_data, max_lag=60)
+results = analyze_series(your_data, max_lag=60) #Inputs are the size of the lag and avai
