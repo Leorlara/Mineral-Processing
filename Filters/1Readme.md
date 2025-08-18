@@ -18,10 +18,11 @@ Example of an application:
 ### Using the code
 I’m not a professional coder, so each new version of this filter includes improvements based on testing across multiple testworks and validation. I recommend the highest-numbered version, as it will be the most reliable.
 
-* V3 will probably be the last version, it works perfectly for the application that I use currently
-* V3 was made to handle multiple files, so instead of asking for a file, it will ask for a folder with all the tests, just link it
-* It will also ask for an output folder, the code will create new files that will put on this filtered folder, the original files will remain intact
-* AS this follows the Geopyora file formating, mass is located on column 10 in the excel file (or [9] for the code), if you're using for other application just change that line
-* The code will ask in order for the mean mass of each file it read (it interprets each file as a sample) - The possible next upgrade would be to automate this step
-* On the output folder will also be a summary file saying the ammount of particles that were removed from each sample - Very good for a quick analysis of how many particles were removed from a sample (if more than )
+- Instead of selecting a single file, it will ask for a folder containing all the tests. Just link that folder and make sure that only the target samples are in said folder
+- It will also ask for an output folder. The script will then create new filtered files in that folder, while leaving the original files untouched. The folder doesn't need to be empty, but I recommend it. Also, if no output folder is inputed, the code will create one to dump the files
+- Since this was designed for Geopyora data formatting, the mass column is expected in column 10 of the Excel file (index [9] in the code). If you’re adapting it for another application, just change that line or put your mass data in the 10th line.
+- For each file it processes (interpreted as one sample), the code will prompt you to enter the mean particle mass. A potential future improvement would be to automate this step.
+- In addition to the filtered files, the output folder will also contain a summary file. This file reports the number of particles removed from each sample, which is useful for quickly assessing data quality (e.g., if an unusually high number of particles were discarded).
+
+- A note from me: If particles are removed because they fall outside the valid range, the comparison between the Geopyora test and the SMC test is somewhat compromised, but still usable in many cases. For example, if only 2 particles are removed from a 30-particle sample, the data remains meaningful. However, if more than ~30% of particles are excluded, the comparison becomes unreliable. In extreme cases (close to 50% of particles removed), the sample should be considered unusable for comparison purposes. As a rule of thumb, I recommend treating 30% removed as the upper limit for considering the results valid. ** This guideline is not based on any research, just a suggestion **
 
