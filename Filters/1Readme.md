@@ -1,6 +1,8 @@
+<p align="justify"> Your Text </p>
+
 # Welcome to the Read me of the Filters folder
-I created these files as tools to support some of my research and work in the mineral processing field. They’re not meant to be fancy. Their main purpose is to save time on repetitive tasks.
-Below, you’ll find an overview of each filter along with a short guide on how to use it.
+<p align="justify"> I created these files as tools to support some of my research and work in the mineral processing field. They’re not meant to be fancy. Their main purpose is to save time on repetitive tasks.
+Below, you’ll find an overview of each filter along with a short guide on how to use it. </p> 
 
 Most of these tools were developed while I was working at Geopypra. If you’re interested in the technology behind them, you can learn more here:
 https://www.geopyora.com/
