@@ -16,7 +16,8 @@ Example of an application:
 - Because this tool was intended for comparison against the SMC test, the default range in the code is set to ±30%. This value can be adjusted by changing just a single line in the script.
 
 ### Using the code
-I'm not a good coder, so the following versions of this filter had considerable upgrades after testing on multiple testworks and validating it
+I’m not a professional coder, so each new version of this filter includes improvements based on testing across multiple testworks and validation. I recommend the highest-numbered version, as it will be the most reliable.
+
 * V3 will probably be the last version, it works perfectly for the application that I use currently
 * V3 was made to handle multiple files, so instead of asking for a file, it will ask for a folder with all the tests, just link it
 * It will also ask for an output folder, the code will create new files that will put on this filtered folder, the original files will remain intact
