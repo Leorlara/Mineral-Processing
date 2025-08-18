@@ -18,6 +18,7 @@ Example of an application:
 ### Using the code
 I’m not a professional coder, so each new version of this filter includes improvements based on testing across multiple testworks and validation. I recommend the highest-numbered version, as it will be the most reliable.
 
+- Outside of this Read me, the code is full of comments from me explaining multiple part of it, use that as a guide as well
 - Instead of selecting a single file, it will ask for a folder containing all the tests. Just link that folder and make sure that only the target samples are in said folder
 - It will also ask for an output folder. The script will then create new filtered files in that folder, while leaving the original files untouched. The folder doesn't need to be empty, but I recommend it. Also, if no output folder is inputed, the code will create one to dump the files
 - Since this was designed for Geopyora data formatting, the mass column is expected in column 10 of the Excel file (index [9] in the code). If you’re adapting it for another application, just change that line or put your mass data in the 10th line.
