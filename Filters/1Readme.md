@@ -6,7 +6,7 @@ Most of these tools were developed while I was working at Geopypra. If you’re 
 https://www.geopyora.com/
 
 ## Mass filter
-I developed this to me assist with comparisons against the SMC test. For parity testing, we recommend that particle selection for the Geopyora test follow the same criteria used in the SMC test (± of the mean particle weight).
+<p align="justify"> I developed this to me assist with comparisons against the SMC test. For parity testing, we recommend that particle selection for the Geopyora test follow the same criteria used in the SMC test (± of the mean particle weight). </p>
 For many reasons, some particles may fall outside the criteria. This can happen for several reasons, such as miscommunication or overlooking the target mean particle mass range. To address this, the Mass Filter was created to automatically identify and remove those particles in a fast and efficient way.
 
 Example of an application:
