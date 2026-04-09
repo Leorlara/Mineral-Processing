@@ -3,72 +3,70 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy import stats
 
-def process_and_plot_outliers(file_path):
-    # 1. Load the data
-    # Ensure 'openpyxl' is installed if loading .xlsx (pip install openpyxl)
-    if file_path.endswith('.csv'):
-        df = pd.read_csv(file_path)
-    else:
+def remove_fit_outliers(file_path, output_path):
+    try:
+        # 1. Load the private Excel file
+        # Required: pip install pandas openpyxl scipy matplotlib
         df = pd.read_excel(file_path)
+        
+        # Clean column names (removes hidden spaces)
+        df.columns = df.columns.str.strip()
 
-    # 2. Prepare Columns (Adjust names if they differ in your file)
-    x_col = 'GPI'
-    y_col = 'Mill specific energy (kWh/t)'
+        # 2. Define our variables (Update these strings if your column names differ)
+        x_col = 'GPI'
+        y_col = 'Mill specific energy (kWh/t)'
 
-    # Convert to numeric and drop rows with missing values in these columns
-    df[x_col] = pd.to_numeric(df[x_col], errors='coerce')
-    df[y_col] = pd.to_numeric(df[y_col], errors='coerce')
-    data = df.dropna(subset=[x_col, y_col]).copy()
+        if x_col not in df.columns or y_col not in df.columns:
+            print(f"Error: Could not find columns '{x_col}' or '{y_col}'")
+            print(f"Available columns: {df.columns.tolist()}")
+            return
 
-    x = data[x_col].values
-    y = data[y_col].values
+        # Remove rows with NaN in these specific columns so the math doesn't break
+        df_temp = df.dropna(subset=[x_col, y_col]).copy()
 
-    # 3. Fit Linear Model to calculate residuals
-    # This is the 'fitting' step to see how far points are from the trend
-    slope, intercept, r_value, p_value, std_err = stats.linregress(x, y)
-    predicted = slope * x + intercept
-    residuals = y - predicted
+        # 3. Calculate the Linear Fit and Residuals
+        slope, intercept, r_value, p_value, std_err = stats.linregress(df_temp[x_col], df_temp[y_col])
+        
+        # Predicted Y values based on the fit
+        df_temp['Expected_Y'] = intercept + slope * df_temp[x_col]
+        
+        # Calculate the distance (Residual) from the line
+        df_temp['Residual'] = df_temp[y_col] - df_temp['Expected_Y']
 
-    # 4. Systematic Outlier Removal (IQR Method on Residuals)
-    # This matches the logic from your provided snippet
-    q1 = np.percentile(residuals, 25)
-    q3 = np.percentile(residuals, 75)
-    iqr = q3 - q1
-    factor = 1.5  # Standard IQR factor; increase to 3.0 for 'extreme' only
-    lower_bound = q1 - factor * iqr
-    upper_bound = q3 + factor * iqr
+        # 4. Filter by Z-Score of the Residuals
+        # We remove points that are more than 2 Standard Deviations away from the line
+        z_scores = np.abs(stats.zscore(df_temp['Residual']))
+        df_clean = df_temp[z_scores < 2].copy()
 
-    # Identify which rows are outliers
-    is_outlier = (residuals < lower_bound) | (residuals > upper_bound)
-    
-    clean_data = data[~is_outlier]
-    outliers = data[is_outlier]
+        print(f"Original rows: {len(df)}")
+        print(f"Rows after removing fit outliers: {len(df_clean)}")
 
-    # 5. Plotting (This will show up in VS Code)
-    plt.figure(figsize=(10, 6))
-    
-    # Plot the good points
-    plt.scatter(clean_data[x_col], clean_data[y_col], color='blue', alpha=0.6, label='Normal Data')
-    
-    # Plot the removed points in red
-    plt.scatter(outliers[x_col], outliers[y_col], color='red', marker='x', s=80, label='Outliers Removed')
-    
-    # Plot the trend line
-    plt.plot(x, predicted, color='black', linestyle='--', alpha=0.5, label='Trend Line')
+        # 5. Save the new file
+        df_clean.drop(columns=['Expected_Y', 'Residual'], inplace=True)
+        df_clean.to_excel(output_path, index=False)
+        print(f"--- SUCCESS: Cleaned file saved to {output_path} ---")
 
-    plt.title(f'Systematic Outlier Removal (Factor: {factor})')
-    plt.xlabel(x_col)
-    plt.ylabel(y_col)
-    plt.legend()
-    plt.grid(True, linestyle='--', alpha=0.7)
-    
-    # Final command to render the graph in VS Code
-    plt.show()
+        # 6. Visualize the removal
+        plt.figure(figsize=(10, 6))
+        plt.scatter(df_temp[x_col], df_temp[y_col], color='red', label='Outliers', alpha=0.5)
+        plt.scatter(df_clean[x_col], df_clean[y_col], color='blue', label='Kept Data')
+        plt.plot(df_temp[x_col], df_temp['Expected_Y'], color='black', label='Trend Line')
+        plt.xlabel(x_col)
+        plt.ylabel(y_col)
+        plt.title(f"Outlier Removal: {x_col} vs {y_col}")
+        plt.legend()
+        plt.show()
 
-    # Save the cleaned result
-    clean_data.to_csv("Cleaned_Database.csv", index=False)
-    print(f"Done! Removed {len(outliers)} outliers.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
 
-# Run the function
-# Make sure the file name matches exactly what is in your folder
-process_and_plot_outliers('Revised database - Model - Revised.xlsx - Original.csv')
+# --- SET YOUR PATHS HERE ---
+
+# Path to your private data (outside GitHub)
+input_file = r"C:\Users\leorl\Downloads\Database code\Revised database - Model - Revised.xlsx"
+
+# Path where the new "Cleaned" file will be created
+output_file = r"C:\Users\leorl\Downloads\Database code\Cleaned_Mineral_Data.xlsx"
+
+if __name__ == "__main__":
+    remove_fit_outliers(input_file, output_file)
